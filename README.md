@@ -10,6 +10,21 @@
 
 客户以为问题在「整理慢」，实际病根在三处：**换岗后反馈发错人**、**企业说不出哪个岗位任务没做好**、**改进建议落不到具体课程**。这三处不修，整理得越快，糊涂账抄得越整齐。
 
+## 可运行的 MVP
+
+`src/` 下是可直接启动的服务：FastAPI 接口 + 知识库检索与知识图谱 + 分层权限 + 审计链 + 单页前端，
+模型层可选接本地 Ollama（默认走确定性规则，不装模型也能演示）。
+
+```bash
+cd src
+./run.ps1     # Windows：自动准备环境、构建索引，并打开 http://127.0.0.1:8010
+# 或
+docker build -t learning-support-mvp . && docker run -p 8000:8000 learning-support-mvp
+```
+
+演示账号：`teacher/teacher123`（起草）、`reviewer/review123`（确认）、`admin/admin123`（管理）、
+`student/student123`（只读）。端到端测试：`python tests/harness.py`，当前 30/30 通过。
+
 ## 目录结构
 
 ```
@@ -27,7 +42,7 @@ education/
 │   ├── 提示词-模板版.md
 │   ├── 知行职业学院-实习反馈里的能力缺口-四份可核对资料.html
 │   └── 现状流程图.png
-├── src/                            # 代码（当前为占位，按提示词实现）
+├── src/                            # 可运行的 MVP（FastAPI · 知识库 · 分层权限 · 单页前端）
 └── tools/                          # 文档构建与校验脚本
 ```
 
