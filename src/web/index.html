@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>学习支持与辅导协作 · MVP</title>
+<style>
+  :root{
+    --ink:#22322c; --ink2:#4b5f54; --muted:#7d8f85; --line:#dfe6da;
+    --paper:#fbfcf7; --card:#fff; --accent:#2d654f; --accent-l:#eaf2e6;
+    --warn:#a4552f; --warn-l:#fbeee6; --ok:#3f7d5c; --ok-l:#e8f3ec; --bad:#a33f3f; --bad-l:#fbeaea;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.7 "Microsoft YaHei","PingFang SC",system-ui,sans-serif;color:var(--ink);background:var(--paper)}
+  header{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:0;z-index:9}
+  header h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.3px}
+  header .sub{font-size:12px;color:var(--muted)}
+  header .spacer{flex:1}
+  .who{font-size:13px;color:var(--ink2)}
+  .badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;border:1px solid var(--line);background:var(--accent-l);color:var(--accent)}
+  main{max-width:1120px;margin:0 auto;padding:22px}
+  nav{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+  nav button{border:1px solid var(--line);background:var(--card);color:var(--ink2);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px}
+  nav button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  section.panel{display:none}
+  section.panel.on{display:block}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:14px}
+  .card h3{margin:0 0 10px;font-size:14px;color:var(--accent)}
+  label{display:block;font-size:13px;color:var(--ink2);margin:10px 0 4px}
+  input,textarea,select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+  textarea{min-height:96px;resize:vertical}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .btn{background:var(--accent);color:#fff;border:none;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:14px}
+  .btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .hint{font-size:12px;color:var(--muted);margin-top:6px}
+  .hit{border-left:3px solid var(--accent-l);padding:8px 12px;margin:10px 0;background:#fdfefb}
+  .hit b{font-size:13px}
+  .score{float:right;font-size:12px;color:var(--muted)}
+  .snippet{font-size:13px;color:var(--ink2);white-space:pre-wrap;max-height:120px;overflow:hidden}
+  .pill{display:inline-block;font-size:12px;padding:1px 9px;border-radius:10px;margin-right:6px}
+  .pill.ok{background:var(--ok-l);color:var(--ok)}
+  .pill.bad{background:var(--bad-l);color:var(--bad)}
+  .pill.warn{background:var(--warn-l);color:var(--warn)}
+  .pill.info{background:var(--accent-l);color:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12px}
+  .kv{display:grid;grid-template-columns:120px 1fr;gap:6px 12px;font-size:13px}
+  .kv div:nth-child(odd){color:var(--muted)}
+  .empty{color:var(--muted);font-size:13px;padding:12px 0}
+  .login-wrap{max-width:380px;margin:60px auto}
+  .err{color:var(--bad);font-size:13px;margin-top:8px}
+  code{background:#f2f5ee;padding:1px 5px;border-radius:4px;font-size:12.5px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>学习支持与辅导协作 · MVP</h1>
+  <span class="sub">知行职业学院 · 实习反馈里的能力缺口</span>
+  <span class="spacer"></span>
+  <span class="who" id="who"></span>
+  <span class="badge" id="llmBadge" title="模型状态"></span>
+  <button class="btn ghost" id="logout" style="display:none">退出</button>
+</header>
+
+<main>
+  <!-- 登录 -->
+  <div id="loginView" class="login-wrap">
+    <div class="card">
+      <h3>登录</h3>
+      <label>用户名</label><input id="u" value="teacher">
+      <label>口令</label><input id="p" type="password" value="teacher123">
+      <div class="hint">演示账号：teacher/teacher123 · reviewer/review123 · admin/admin123 · student/student123</div>
+      <div style="margin-top:14px"><button class="btn" id="loginBtn">登录</button></div>
+      <div class="err" id="loginErr"></div>
+    </div>
+  </div>
+
+  <!-- 主体 -->
+  <div id="app" style="display:none">
+    <nav>
+      <button data-tab="search" class="on">知识检索</button>
+      <button data-tab="wiki">知识图谱 Wiki</button>
+      <button data-tab="advice">建议工作台</button>
+      <button data-tab="audit">审计</button>
+    </nav>
+
+    <section class="panel on" id="panel-search">
+      <div class="card">
+        <h3>检索业务文档</h3>
+        <input id="q" placeholder="例如：换岗 反馈 发错 旧导师 / 完整率 口径 / 24 条建议">
+        <div style="margin-top:10px"><button class="btn" id="searchBtn">检索</button></div>
+        <div class="hint">BM25 检索，命中直接给出原文出处（文件名 · 章节）；证据编号 education-fNN 会附着在结果上。</div>
+      </div>
+      <div id="searchOut"></div>
+    </section>
+
+    <section class="panel" id="panel-wiki">
+      <div class="card">
+        <h3>知识图谱</h3>
+        <div id="graphStats" class="kv"></div>
+        <div class="hint">Wiki 页面由图谱节点生成：角色 / 访谈事实 / 需求假设 / 度量 / 决策点。点一行看它的一跳邻居。</div>
+      </div>
+      <div class="card">
+        <table id="wikiTable"><thead><tr><th>类型</th><th>条目</th><th>摘要</th><th>连接</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div id="wikiDetail"></div>
+    </section>
+
+    <section class="panel" id="panel-advice">
+      <div class="card">
+        <h3>起草改进建议</h3>
+        <div class="row">
+          <div><label>学生标识</label><input id="aStudent" placeholder="S-042"></div>
+          <div><label>课程</label><input id="aCourse" value="机电一体化·设备维护"></div>
+        </div>
+        <label>岗位任务</label><input id="aTask" value="设备点检与交接">
+        <label>行为实例（一行一条）</label>
+        <textarea id="aObs">6 月 3 日点检表漏填润滑项
+交接班记录未签名，次日重复停机</textarea>
+        <div class="hint">没有行为实例、或涉及家庭背景等敏感属性时，系统会直接拦截，不生成建议。</div>
+        <div style="margin-top:12px"><button class="btn" id="draftBtn">生成建议</button></div>
+      </div>
+      <div id="adviceOut"></div>
+      <div class="card">
+        <h3>建议列表</h3>
+        <table id="adviceTable"><thead><tr><th>ID</th><th>学生</th><th>任务</th><th>状态</th><th>置信度</th><th></th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-audit">
+      <div class="card">
+        <h3>审计链</h3>
+        <button class="btn" id="verifyBtn">校验完整性</button>
+        <span id="verifyOut" style="margin-left:12px"></span>
+        <div class="hint">每条记录都带前一条的哈希；改动任何一条，校验即失败。</div>
+      </div>
+      <div class="card"><table id="auditTable"><thead><tr><th>时间</th><th>动作</th><th>操作者</th><th>摘要</th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </div>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+let TOKEN = localStorage.getItem('token') || '';
+let ME = null;
+
+async function api(path, opts = {}) {
+  const res = await fetch(path, {
+    ...opts,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(TOKEN ? { Authorization: 'Bearer ' + TOKEN } : {}),
+      ...(opts.headers || {}),
+    },
+  });
+  const text = await res.text();
+  let data = null;
+  try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+  if (!res.ok) {
+    const err = new Error((data && (data.detail?.message || data.detail?.error || data.message || data.error)) || res.status);
+    err.status = res.status; err.data = data;
+    throw err;
+  }
+  return data;
+}
+
+function show(view) {
+  $('#loginView').style.display = view === 'login' ? 'block' : 'none';
+  $('#app').style.display = view === 'app' ? 'block' : 'none';
+  $('#logout').style.display = view === 'app' ? 'inline-block' : 'none';
+}
+
+async function loadMe() {
+  ME = await api('/me');
+  $('#who').innerHTML = `${ME.name || ME.username} <span class="badge">${ME.role}</span>`;
+  try {
+    const s = await api('/llm/status');
+    const on = s.enabled && s.reachable && s.model_present;
+    $('#llmBadge').textContent = on ? `模型 ${s.model} · 在线` : (s.enabled ? '模型离线 · 规则模式' : '规则模式');
+    $('#llmBadge').style.background = on ? 'var(--ok-l)' : 'var(--warn-l)';
+    $('#llmBadge').style.color = on ? 'var(--ok)' : 'var(--warn)';
+  } catch { $('#llmBadge').textContent = ''; }
+}
+
+$('#loginBtn').onclick = async () => {
+  $('#loginErr').textContent = '';
+  try {
+    const r = await api('/auth/login', { method: 'POST', body: JSON.stringify({ username: $('#u').value, password: $('#p').value }) });
+    TOKEN = r.token; localStorage.setItem('token', TOKEN);
+    await loadMe(); show('app'); refreshAll();
+  } catch (e) { $('#loginErr').textContent = '登录失败：' + e.message; }
+};
+$('#logout').onclick = () => { TOKEN = ''; localStorage.removeItem('token'); ME = null; show('login'); };
+
+document.querySelectorAll('nav button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('nav button').forEach(x => x.classList.remove('on'));
+    document.querySelectorAll('section.panel').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    $('#panel-' + b.dataset.tab).classList.add('on');
+    if (b.dataset.tab === 'wiki') loadWiki();
+    if (b.dataset.tab === 'audit') loadAudit();
+    if (b.dataset.tab === 'advice') loadAdviceList();
+  };
+});
+
+// ---------------- 检索
+$('#searchBtn').onclick = doSearch;
+$('#q').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+async function doSearch() {
+  const q = $('#q').value.trim();
+  if (!q) return;
+  $('#searchOut').innerHTML = '<div class="card"><div class="empty">检索中…</div></div>';
+  try {
+    const r = await api('/kb/search?k=6&q=' + encodeURIComponent(q));
+    if (!r.hits.length) { $('#searchOut').innerHTML = '<div class="card"><div class="empty">没有命中，换个关键词试试。</div></div>'; return; }
+    $('#searchOut').innerHTML = r.hits.map(h => `
+      <div class="card hit">
+        <span class="score">score ${h.score}</span>
+        <b>${esc(h.heading || '(无小节)')}</b> <span class="hint">· ${esc(h.path)}${h.line ? ' : ' + h.line : ''}</span>
+        ${(h.facts || []).length ? '<div style="margin-top:4px">' + h.facts.map(f => `<span class="pill info">education-${f}</span>`).join('') + '</div>' : ''}
+        <div class="snippet">${esc((h.text || '').slice(0, 320))}</div>
+      </div>`).join('');
+  } catch (e) { $('#searchOut').innerHTML = `<div class="card"><div class="err">检索失败：${esc(e.message)}</div></div>`; }
+}
+
+// ---------------- Wiki
+async function loadWiki() {
+  try {
+    const [stats, wiki] = await Promise.all([api('/graph/stats'), api('/wiki')]);
+    $('#graphStats').innerHTML = `
+      <div>节点 / 边</div><div>${stats.nodes} / ${stats.edges}</div>
+      <div>类型分布</div><div>${Object.entries(stats.types).map(([k, v]) => `<span class="pill info">${k} ${v}</span>`).join('')}</div>
+      <div>版本</div><div>${esc(stats.version || '-')} · ${esc(stats.generated_at || '')}</div>`;
+    $('#wikiTable tbody').innerHTML = wiki.pages.map(p => `
+      <tr onclick="showNode('${p.id}')" style="cursor:pointer">
+        <td><span class="pill info">${esc(p.type)}</span></td>
+        <td><b>${esc(p.label)}</b></td>
+        <td>${esc((p.summary || '').slice(0, 70))}</td>
+        <td>${p.out} 出 / ${p.in} 入</td>
+      </tr>`).join('');
+  } catch (e) { $('#graphStats').innerHTML = `<div class="err">${esc(e.message)}</div>`; }
+}
+
+async function showNode(id) {
+  try {
+    const nb = await api('/graph/neighbors/' + encodeURIComponent(id));
+    const node = nb.nodes.find(n => n.id === id) || { id };
+    $('#wikiDetail').innerHTML = `
+      <div class="card">
+        <h3>${esc(node.label || id)}</h3>
+        <div class="kv">
+          <div>节点 ID</div><div><code>${esc(id)}</code></div>
+          <div>类型</div><div>${esc(node.type || '')}</div>
+          <div>摘要</div><div>${esc(node.summary || '—')}</div>
+          <div>来源</div><div>${esc(node.source_ref || '—')}</div>
+        </div>
+        <h3 style="margin-top:14px">一跳邻居</h3>
+        ${nb.edges.map(e => `<div style="font-size:13px;margin:4px 0">
+          <code>${esc(e.relation)}</code> ${esc(e.source === id ? '→ ' + e.target : '← ' + e.source)}
+        </div>`).join('') || '<div class="empty">无连接</div>'}
+      </div>`;
+  } catch (e) { $('#wikiDetail').innerHTML = `<div class="card"><div class="err">${esc(e.message)}</div></div>`; }
+}
+
+// ---------------- 建议
+$('#draftBtn').onclick = async () => {
+  const body = {
+    student: $('#aStudent').value.trim(),
+    course: $('#aCourse').value.trim(),
+    task: $('#aTask').value.trim(),
+    observations: $('#aObs').value.split('\n').map(s => s.trim()).filter(Boolean),
+  };
+  $('#adviceOut').innerHTML = '<div class="card"><div class="empty">生成中…</div></div>';
+  try {
+    const r = await api('/advice', { method: 'POST', body: JSON.stringify(body) });
+    renderAdvice(r);
+    loadAdviceList();
+  } catch (e) {
+    $('#adviceOut').innerHTML = `<div class="card"><div class="err">失败：${esc(e.message)}</div></div>`;
+  }
+};
+
+const STATUS = { pending_confirmation: ['待确认', 'warn'], approved: ['已通过', 'ok'], rejected: ['已驳回', 'bad'], blocked: ['已拦截', 'bad'], needs_human: ['转人工', 'warn'] };
+
+function renderAdvice(r) {
+  const [label, cls] = STATUS[r.status] || [r.status, 'info'];
+  $('#adviceOut').innerHTML = `
+    <div class="card">
+      <h3>建议 ${esc(r.id)} <span class="pill ${cls}">${label}</span></h3>
+      <div class="kv">
+        <div>学生 / 课程</div><div>${esc(r.student)} · ${esc(r.course || '—')}</div>
+        <div>岗位任务</div><div>${esc(r.task || '—')}</div>
+        <div>置信度</div><div>${r.confidence}（阈值 ${r.threshold}）</div>
+        <div>起草人</div><div>${esc(r.created_by)}</div>
+      </div>
+      ${r.blockers.length ? `<div style="margin-top:10px"><b style="color:var(--bad)">拦截原因</b><ul style="margin:6px 0 0;padding-left:20px">${r.blockers.map(b => `<li>${esc(b)}</li>`).join('')}</ul></div>` : ''}
+      ${r.suggestions.length ? `<div style="margin-top:12px"><b>建议条目</b>${r.suggestions.map((s, i) => `
+        <div class="hit" style="margin-top:8px">
+          <b>${i + 1}. ${esc(s.action)}</b>
+          <div class="snippet">依据：${esc(s.evidence)}</div>
+          ${(s.fact_refs || []).map(f => `<span class="pill info">education-${f}</span>`).join('')}
+        </div>`).join('')}</div>` : ''}
+      <div style="margin-top:14px">
+        <button class="btn" onclick="confirmAdvice('${r.id}','approve')">确认通过</button>
+        <button class="btn ghost" onclick="confirmAdvice('${r.id}','reject')">驳回</button>
+      </div>
+      <div class="hint">起草人不能确认自己的建议；确认动作会写入审计链。</div>
+    </div>`;
+}
+
+async function confirmAdvice(id, decision) {
+  try {
+    const r = await api(`/advice/${id}/confirm`, { method: 'POST', body: JSON.stringify({ decision, note: '' }) });
+    renderAdvice(r); loadAdviceList();
+  } catch (e) {
+    alert('确认失败：' + e.message + (e.status === 403 ? '\n\n（本人签核被拒，或你的角色没有确认权）' : ''));
+  }
+}
+
+async function loadAdviceList() {
+  try {
+    const r = await api('/advice');
+    $('#adviceTable tbody').innerHTML = r.items.length ? r.items.map(a => {
+      const [label, cls] = STATUS[a.status] || [a.status, 'info'];
+      return `<tr>
+        <td><code>${esc(a.id)}</code></td><td>${esc(a.student)}</td><td>${esc((a.task || '').slice(0, 18))}</td>
+        <td><span class="pill ${cls}">${label}</span></td><td>${a.confidence}</td>
+        <td><button class="btn ghost" onclick="viewAdvice('${a.id}')">查看</button></td>
+      </tr>`;
+    }).join('') : '<tr><td colspan="6" class="empty">还没有建议，先在上面起草一条。</td></tr>';
+  } catch (e) { /* 无权限时静默 */ }
+}
+
+async function viewAdvice(id) {
+  const r = await api('/advice/' + encodeURIComponent(id));
+  renderAdvice(r);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ---------------- 审计
+async function loadAudit() {
+  try {
+    const r = await api('/audit?limit=60');
+    $('#auditTable tbody').innerHTML = r.records.map(x => `<tr>
+      <td>${esc(x.at)}</td><td><code>${esc(x.action)}</code></td>
+      <td>${esc(x.actor || '-')} <span class="hint">${esc(x.role || '')}</span></td>
+      <td>${esc(JSON.stringify(x.detail).slice(0, 90))}</td></tr>`).join('');
+  } catch (e) { $('#auditTable tbody').innerHTML = `<tr><td colspan="4" class="err">${esc(e.message)}</td></tr>`; }
+}
+
+$('#verifyBtn').onclick = async () => {
+  $('#verifyOut').textContent = '校验中…';
+  try {
+    const r = await api('/audit/verify');
+    $('#verifyOut').innerHTML = r.ok
+      ? `<span class="pill ok">链完整 · ${r.records} 条</span>`
+      : `<span class="pill bad">校验失败：第 ${r.broken_at} 条 · ${esc(r.reason)}</span>`;
+  } catch (e) { $('#verifyOut').innerHTML = `<span class="err">${esc(e.message)}</span>`; }
+};
+
+// ---------------- 工具
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function refreshAll() { doSearchByDefault(); loadAdviceList(); loadWiki(); loadAudit(); }
+function doSearchByDefault() { $('#q').value = '换岗 反馈 发错 旧导师'; doSearch(); }
+
+(async () => {
+  if (TOKEN) {
+    try { await loadMe(); show('app'); refreshAll(); } catch { TOKEN = ''; localStorage.removeItem('token'); show('login'); }
+  } else { show('login'); }
+})();
+</script>
+</body>
+</html>

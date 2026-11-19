@@ -1,0 +1,10 @@
+.venv/
+runtime/
+__pycache__/
+*.pyc
+_check.js
+_shot_*.png
+data/runtime/index.json
+data/runtime/advice.json
+data/runtime/*.jsonl
+data/runtime/*.bak

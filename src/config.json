@@ -1,0 +1,39 @@
+{
+  "service": {
+    "name": "学习支持与辅导协作 MVP",
+    "version": "v0.1.0",
+    "case": "知行职业学院 · 实习反馈里的能力缺口"
+  },
+  "paths": {
+    "docs": "data/docs",
+    "runtime": "data/runtime",
+    "graph": "data/graph.json"
+  },
+  "llm": {
+    "enabled": true,
+    "base_url": "http://127.0.0.1:11434",
+    "model": "qwen3:4b",
+    "timeout": 120
+  },
+  "thresholds": {
+    "advice_confidence_min": 0.55,
+    "max_chunks": 6
+  },
+  "rbac": {
+    "allow": {
+      "admin": ["kb:search", "graph:read", "advice:read", "advice:draft", "advice:confirm",
+                "audit:read", "audit:verify", "admin:users", "export"],
+      "coordinator": ["kb:search", "graph:read", "advice:read", "advice:draft",
+                      "advice:confirm", "audit:read", "audit:verify", "export"],
+      "teacher": ["kb:search", "graph:read", "advice:read", "advice:draft"],
+      "reviewer": ["kb:search", "graph:read", "advice:read", "advice:confirm",
+                   "audit:read", "audit:verify"],
+      "student": ["kb:search", "graph:read"]
+    },
+    "deny": {
+      "teacher": ["audit:read", "admin:users", "advice:confirm"],
+      "reviewer": ["advice:draft", "admin:users"],
+      "student": ["advice:draft", "advice:confirm", "audit:read", "admin:users"]
+    }
+  }
+}

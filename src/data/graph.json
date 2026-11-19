@@ -1,0 +1,671 @@
+{
+ "version": "kg-v1",
+ "generated_at": "2026-11-19T06:04:24+00:00",
+ "nodes": [
+  {
+   "id": "role:gu",
+   "type": "role",
+   "label": "产教融合负责人 · 顾明岚",
+   "summary": "业务发起人与立项牵头人；定范围、节奏、口径",
+   "source_ref": "教育·角色资料"
+  },
+  {
+   "id": "role:lin",
+   "type": "role",
+   "label": "实习指导教师 · 林亦舟",
+   "summary": "一线使用者；回访、归拢、复核现场",
+   "source_ref": "教育·角色资料"
+  },
+  {
+   "id": "role:tang",
+   "type": "role",
+   "label": "教务管理员 · 唐映秋",
+   "summary": "交接与材料责任；异常分派",
+   "source_ref": "教育·角色资料"
+  },
+  {
+   "id": "role:qin",
+   "type": "role",
+   "label": "校园信息工程师 · 秦芮",
+   "summary": "只读接口、ID 映射、刷新与故障预案",
+   "source_ref": "教育·角色资料"
+  },
+  {
+   "id": "role:fu",
+   "type": "role",
+   "label": "教学质量负责人 · 傅景",
+   "summary": "风险否决与验收签字；24/30 硬线",
+   "source_ref": "教育·角色资料"
+  },
+  {
+   "id": "role:ye",
+   "type": "role",
+   "label": "企业实习导师 · 叶书",
+   "summary": "企业侧提交、投诉受理；参与验收",
+   "source_ref": "教育·角色资料"
+  },
+  {
+   "id": "fact:f00",
+   "type": "fact",
+   "label": "f00 · 每学期 600 名学生实习，反馈完整率 54%，目标 85%；要找到",
+   "summary": "每学期 600 名学生实习，反馈完整率 54%，目标 85%；要找到可行动的课程改进。",
+   "source_ref": "education-f00"
+  },
+  {
+   "id": "fact:f01",
+   "type": "fact",
+   "label": "f01 · 你说的“达成目标”，验收是看完整率，还是看有多少条建议真正进入课程改",
+   "summary": "你说的“达成目标”，验收是看完整率，还是看有多少条建议真正进入课程改进？这两者口径不同，会直接影响试点范围和我要不要往专业组评审那一步推。另外，调研阶段我建议先选一两个专业做小范围验证，具体选哪几个专业、由谁牵头评审，目前尚未核实，需要你明确。",
+   "source_ref": "education-f01"
+  },
+  {
+   "id": "fact:f02",
+   "type": "fact",
+   "label": "f02 · 先选机电专业，覆盖 5 家企业，比较建议可执行性和教师整理工时。",
+   "summary": "先选机电专业，覆盖 5 家企业，比较建议可执行性和教师整理工时。",
+   "source_ref": "education-f02"
+  },
+  {
+   "id": "fact:f03",
+   "type": "fact",
+   "label": "f03 · 本次合成试点预算为 12 万元，需要扣除接口、培训、复核和维护成本；",
+   "summary": "本次合成试点预算为 12 万元，需要扣除接口、培训、复核和维护成本；既有系统采购不纳入节省额。",
+   "source_ref": "education-f03"
+  },
+  {
+   "id": "fact:f04",
+   "type": "fact",
+   "label": "f04 · 业务立项由产教融合负责人牵头，教学质量负责人有风险否决权，企业实习导",
+   "summary": "业务立项由产教融合负责人牵头，教学质量负责人有风险否决权，企业实习导师参与交接结果验收。",
+   "source_ref": "education-f04"
+  },
+  {
+   "id": "fact:f05",
+   "type": "fact",
+   "label": "f05 · 建议能不能落到具体课程和岗位任务上，教师整理工时是否可接受。这两项的",
+   "summary": "建议能不能落到具体课程和岗位任务上，教师整理工时是否可接受。这两项的具体阈值目前尚未核实，需要你和我一起定，否则验收会变成各说各话。另外提醒一句，历史回放阶段如果拿不到可对照的旧反馈，建议可执行性就没法比较，这一点要提前跟教务和信息那边确认。你先说清楚：验收是看建议进入课程改进的条数，还是看教师工时下降？口径不同，试点设计会不一样。",
+   "source_ref": "education-f05"
+  },
+  {
+   "id": "fact:f10",
+   "type": "fact",
+   "label": "f10 · 企业只写“沟通能力不足”，不知道发生在哪个岗位任务，无法指导学生改进",
+   "summary": "企业只写“沟通能力不足”，不知道发生在哪个岗位任务，无法指导学生改进。",
+   "source_ref": "education-f10"
+  },
+  {
+   "id": "fact:f11",
+   "type": "fact",
+   "label": "f11 · 学生有换岗与延期，系统仍关联旧导师，导致反馈发给错误的人。",
+   "summary": "学生有换岗与延期，系统仍关联旧导师，导致反馈发给错误的人。",
+   "source_ref": "education-f11"
+  },
+  {
+   "id": "fact:f12",
+   "type": "fact",
+   "label": "f12 · 每位教师带 30 人，每月花约 10 小时整理多份微信、Excel ",
+   "summary": "每位教师带 30 人，每月花约 10 小时整理多份微信、Excel 和邮件。",
+   "source_ref": "education-f12"
+  },
+  {
+   "id": "fact:f13",
+   "type": "fact",
+   "label": "f13 · 在机电专业和 5 家企业的实习反馈现场，使用现有终端；需要保留待补信",
+   "summary": "在机电专业和 5 家企业的实习反馈现场，使用现有终端；需要保留待补信息和最后同步时间，不能要求一线重复登录多个系统才能办完一项业务。",
+   "source_ref": "education-f13"
+  },
+  {
+   "id": "fact:f14",
+   "type": "fact",
+   "label": "f14 · 遇到学生换岗、企业评价没有行为实例或评分口径不一致时，同事会在群聊或",
+   "summary": "遇到学生换岗、企业评价没有行为实例或评分口径不一致时，同事会在群聊或个人表里补充说明，再回系统补录。关键原因目前没有作为结构化字段随业务交接。",
+   "source_ref": "education-f14"
+  },
+  {
+   "id": "fact:f15",
+   "type": "fact",
+   "label": "f15 · 每条辅助结果必须显示原记录。涉及学生换岗、企业评价没有行为实例或评分",
+   "summary": "每条辅助结果必须显示原记录。涉及学生换岗、企业评价没有行为实例或评分口径不一致时，先由教务管理员核对；未经确认的结果不能覆盖原记录。",
+   "source_ref": "education-f15"
+  },
+  {
+   "id": "fact:f20",
+   "type": "fact",
+   "label": "f20 · 先确认学生岗位与导师，再收集任务表现、事实例子和改进建议，最后专业组",
+   "summary": "先确认学生岗位与导师，再收集任务表现、事实例子和改进建议，最后专业组确认。",
+   "source_ref": "education-f20"
+  },
+  {
+   "id": "fact:f22",
+   "type": "fact",
+   "label": "f22 · 教师可以写建议，变更培养方案需教务委员会审批，模型不能决定学生成绩。",
+   "summary": "教师可以写建议，变更培养方案需教务委员会审批，模型不能决定学生成绩。",
+   "source_ref": "education-f22"
+  },
+  {
+   "id": "fact:f23",
+   "type": "fact",
+   "label": "f23 · 交接要带学生批次、导师身份、岗位任务与企业反馈实例、当前版本和未解决",
+   "summary": "交接要带学生批次、导师身份、岗位任务与企业反馈实例、当前版本和未解决事项。接手人明确确认后才结束本岗待办，发送消息不等于责任已转移。",
+   "source_ref": "education-f23"
+  },
+  {
+   "id": "fact:f24",
+   "type": "fact",
+   "label": "f24 · 日常异常按处理人—截止时间—退回原因走，超时升到产教融合负责人；口径",
+   "summary": "日常异常按处理人—截止时间—退回原因走，超时升到产教融合负责人；口径类争议升到教学质量负责人。  但完整的升级层级和各级时限，我手上没有依据，尚未核实。建议先和顾明岚确认协调权限、和傅景确认审核边界，这属于待验证假设。你们希望我先出一份异常分派登记表，把处理人、截止时间、退回原因三列固定下来吗？",
+   "source_ref": "education-f24"
+  },
+  {
+   "id": "fact:f25",
+   "type": "fact",
+   "label": "f25 · 我分派异常时要写明处理人、截止时间与退回原因，超时交给产教融合负责人",
+   "summary": "我分派异常时要写明处理人、截止时间与退回原因，超时交给产教融合负责人协调；不能只把状态改成“已转交”。",
+   "source_ref": "education-f25"
+  },
+  {
+   "id": "fact:f30",
+   "type": "fact",
+   "label": "f30 · 学籍、实习和课程平台使用不同 ID，需要先建立学生与实习批次映射。",
+   "summary": "学籍、实习和课程平台使用不同 ID，需要先建立学生与实习批次映射。",
+   "source_ref": "education-f30"
+  },
+  {
+   "id": "fact:f31",
+   "type": "fact",
+   "label": "f31 · 历史反馈缺少岗位任务字段，先做模板补齐，不能把空值当作没问题。",
+   "summary": "历史反馈缺少岗位任务字段，先做模板补齐，不能把空值当作没问题。",
+   "source_ref": "education-f31"
+  },
+  {
+   "id": "fact:f32",
+   "type": "fact",
+   "label": "f32 · 仅开放只读批量导出，成绩写回接口不在本次范围。",
+   "summary": "仅开放只读批量导出，成绩写回接口不在本次范围。",
+   "source_ref": "education-f32"
+  },
+  {
+   "id": "fact:f33",
+   "type": "fact",
+   "label": "f33 · 学生批次、导师身份、岗位任务与企业反馈实例需要校验主编号、事件时间、",
+   "summary": "学生批次、导师身份、岗位任务与企业反馈实例需要校验主编号、事件时间、来源和版本；缺少关键字段进入人工修复队列，不用猜测值补齐。",
+   "source_ref": "education-f33"
+  },
+  {
+   "id": "fact:f34",
+   "type": "fact",
+   "label": "f34 · 试点数据按每两周一次刷新，原文按版本同步。超过一个周期的结果标注待刷",
+   "summary": "试点数据按每两周一次刷新，原文按版本同步。超过一个周期的结果标注待刷新；历史快照不能伪装成当前状态。",
+   "source_ref": "education-f34"
+  },
+  {
+   "id": "fact:f35",
+   "type": "fact",
+   "label": "f35 · 接口失败时继续原人工流程，保留只读快照与时间戳；恢复后按业务编号去重",
+   "summary": "接口失败时继续原人工流程，保留只读快照与时间戳；恢复后按业务编号去重补齐，不能重复创建同一待办。",
+   "source_ref": "education-f35"
+  },
+  {
+   "id": "fact:f40",
+   "type": "fact",
+   "label": "f40 · 学生个人评价应限制访问范围，不能向其他企业公开个体记录。",
+   "summary": "学生个人评价应限制访问范围，不能向其他企业公开个体记录。",
+   "source_ref": "education-f40"
+  },
+  {
+   "id": "fact:f41",
+   "type": "fact",
+   "label": "f41 · 能力推断必须有行为实例；不以家庭背景、性别等信息解释能力。",
+   "summary": "能力推断必须有行为实例；不以家庭背景、性别等信息解释能力。",
+   "source_ref": "education-f41"
+  },
+  {
+   "id": "fact:f42",
+   "type": "fact",
+   "label": "f42 · 专业组审阅 30 条建议，至少 24 条可对应课程、任务和改进负责人",
+   "summary": "专业组审阅 30 条建议，至少 24 条可对应课程、任务和改进负责人。",
+   "source_ref": "education-f42"
+  },
+  {
+   "id": "fact:f43",
+   "type": "fact",
+   "label": "f43 · 本轮合成试点评价记录暂留 90 天，到期由教学质量负责人确认删除或归",
+   "summary": "本轮合成试点评价记录暂留 90 天，到期由教学质量负责人确认删除或归档；真实组织的资料留存期限需另行核实。",
+   "source_ref": "education-f43"
+  },
+  {
+   "id": "fact:f44",
+   "type": "fact",
+   "label": "f44 · 出现学生换岗、企业评价没有行为实例或评分口径不一致、依据缺失或关键系",
+   "summary": "出现学生换岗、企业评价没有行为实例或评分口径不一致、依据缺失或关键系统不可用时，停止自动建议并标明原因、接手人及人工确认时间。",
+   "source_ref": "education-f44"
+  },
+  {
+   "id": "fact:f45",
+   "type": "fact",
+   "label": "f45 · 审核日志保留学生批次、导师身份、岗位任务与企业反馈实例的版本、建议内",
+   "summary": "审核日志保留学生批次、导师身份、岗位任务与企业反馈实例的版本、建议内容、人工修正与签核人，能重建当次处理；不记录口令或非必要个人信息。",
+   "source_ref": "education-f45"
+  },
+  {
+   "id": "fact:f50",
+   "type": "fact",
+   "label": "f50 · 我需要每两周提交一次具体任务例子，长问卷会拖到学期结束才填。",
+   "summary": "我需要每两周提交一次具体任务例子，长问卷会拖到学期结束才填。",
+   "source_ref": "education-f50"
+  },
+  {
+   "id": "fact:f51",
+   "type": "fact",
+   "label": "f51 · 企业重视设备点检与交接，学校评价更偏理论，任务口径需共同校准。",
+   "summary": "企业重视设备点检与交接，学校评价更偏理论，任务口径需共同校准。",
+   "source_ref": "education-f51"
+  },
+  {
+   "id": "fact:f52",
+   "type": "fact",
+   "label": "f52 · AI 可整理观察事实与建议，最终评价由导师确认，不自动给学生定性。",
+   "summary": "AI 可整理观察事实与建议，最终评价由导师确认，不自动给学生定性。",
+   "source_ref": "education-f52"
+  },
+  {
+   "id": "fact:f53",
+   "type": "fact",
+   "label": "f53 · 各部门的完成时间要分别记录。反馈完整率 85%，30 条建议至少 2",
+   "summary": "各部门的完成时间要分别记录。反馈完整率 85%，30 条建议至少 24 条可执行 的分母、统计周期和排除规则由业务负责人固定，不能用消息发送量代替实际完成量。",
+   "source_ref": "education-f53"
+  },
+  {
+   "id": "fact:f54",
+   "type": "fact",
+   "label": "f54 · 下游反馈必须关联原业务编号和当时的资料版本；由企业实习导师受理，教务",
+   "summary": "下游反馈必须关联原业务编号和当时的资料版本；由企业实习导师受理，教务管理员核实，未确认前不承诺赔偿或结果。",
+   "source_ref": "education-f54"
+  },
+  {
+   "id": "fact:f55",
+   "type": "fact",
+   "label": "f55 · 每周复盘与机电专业和 5 家企业的实习反馈相关的误判和未解决问题，由",
+   "summary": "每周复盘与机电专业和 5 家企业的实习反馈相关的误判和未解决问题，由产教融合负责人指定改进负责人，复测“反馈完整率 85%，30 条建议至少 24 条可执行”后才更新规则。",
+   "source_ref": "education-f55"
+  },
+  {
+   "id": "req:r1",
+   "type": "requirement",
+   "label": "R1 · 以岗位任务为锚点重构反馈模板，是解决“沟通能力不足”类笼统评价的前置需求",
+   "summary": "优先级 P0",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r2",
+   "type": "requirement",
+   "label": "R2 · 双周短反馈机制比学期末长问卷更能提升反馈完整率",
+   "summary": "优先级 P0",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r3",
+   "type": "requirement",
+   "label": "R3 · 异常换岗与导师关联错误需要结构化交接字段，而非群聊补录",
+   "summary": "优先级 P0",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r4",
+   "type": "requirement",
+   "label": "R4 · 学生与实习批次ID映射及版本时间戳是分析可信度的前置条件",
+   "summary": "优先级 P1",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r5",
+   "type": "requirement",
+   "label": "R5 · AI整理结果必须保留原文追溯与人工确认，才能满足质量与审计要求",
+   "summary": "优先级 P0",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r6",
+   "type": "requirement",
+   "label": "R6 · 评分口径与统计分母需业务负责人固定，否则验收数字不可比",
+   "summary": "优先级 P1",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r7",
+   "type": "requirement",
+   "label": "R7 · 岗位任务关联的改进建议",
+   "summary": "优先级 P1",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r8",
+   "type": "requirement",
+   "label": "R8 · 轻量双周反馈与异常换岗",
+   "summary": "优先级 P1",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r9",
+   "type": "requirement",
+   "label": "R9 · 评分口径对齐",
+   "summary": "优先级 P0",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r10",
+   "type": "requirement",
+   "label": "R10 · 学生实习批次映射",
+   "summary": "优先级 P1",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r11",
+   "type": "requirement",
+   "label": "R11 · 可追溯且限制访问的评价",
+   "summary": "优先级 P0",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "req:r12",
+   "type": "requirement",
+   "label": "R12 · 企业与课程能力映射",
+   "summary": "优先级 P1",
+   "source_ref": "discovery-report#需求"
+  },
+  {
+   "id": "metric:complete_rate",
+   "type": "metric",
+   "label": "反馈完整率",
+   "summary": "现状 54%，目标 85%；分母与排除规则待业务负责人固定",
+   "source_ref": "discovery-report#验收"
+  },
+  {
+   "id": "metric:teacher_hours",
+   "type": "metric",
+   "label": "教师整理工时",
+   "summary": "约 10 小时/人·月；未拆分搬运与核对",
+   "source_ref": "discovery-report#验收"
+  },
+  {
+   "id": "metric:actionable",
+   "type": "metric",
+   "label": "建议可对应率",
+   "summary": "专业组审阅 30 条至少 24 条可对应课程/任务/负责人",
+   "source_ref": "discovery-report#验收"
+  },
+  {
+   "id": "metric:review_minutes",
+   "type": "metric",
+   "label": "复核耗时",
+   "summary": "教务核对 + 专业组评审 + 质量签核的条数与分钟",
+   "source_ref": "discovery-report#验收"
+  },
+  {
+   "id": "metric:misroute",
+   "type": "metric",
+   "label": "换岗错发与补录",
+   "summary": "错发条数、群聊补录次数；目前只有定性描述",
+   "source_ref": "discovery-report#验收"
+  },
+  {
+   "id": "metric:traceability",
+   "type": "metric",
+   "label": "追溯合格率",
+   "summary": "可点回原文与版本、且标注确认人的比例",
+   "source_ref": "discovery-report#验收"
+  },
+  {
+   "id": "decision:l1",
+   "type": "decision",
+   "label": "立项与范围",
+   "summary": "顾明岚牵头立项，傅景有风险否决权",
+   "source_ref": "业务机会清单#决策链"
+  },
+  {
+   "id": "decision:l3",
+   "type": "decision",
+   "label": "口径固定",
+   "summary": "完整率与可对应率的分母、周期、排除规则由业务负责人固定",
+   "source_ref": "业务机会清单#决策链"
+  },
+  {
+   "id": "decision:l9",
+   "type": "decision",
+   "label": "试点验收",
+   "summary": "专业组审阅，傅景不签字即不通过",
+   "source_ref": "业务机会清单#决策链"
+  },
+  {
+   "id": "decision:l11",
+   "type": "decision",
+   "label": "培养方案变更",
+   "summary": "只能走教务委员会，模型不得介入",
+   "source_ref": "业务机会清单#决策链"
+  }
+ ],
+ "edges": [
+  {
+   "source": "fact:f00",
+   "target": "role:gu",
+   "relation": "spoken_by",
+   "source_ref": "education-f00"
+  },
+  {
+   "source": "fact:f02",
+   "target": "role:gu",
+   "relation": "spoken_by",
+   "source_ref": "education-f02"
+  },
+  {
+   "source": "fact:f03",
+   "target": "role:gu",
+   "relation": "spoken_by",
+   "source_ref": "education-f03"
+  },
+  {
+   "source": "fact:f04",
+   "target": "role:gu",
+   "relation": "spoken_by",
+   "source_ref": "education-f04"
+  },
+  {
+   "source": "fact:f10",
+   "target": "role:lin",
+   "relation": "spoken_by",
+   "source_ref": "education-f10"
+  },
+  {
+   "source": "fact:f11",
+   "target": "role:lin",
+   "relation": "spoken_by",
+   "source_ref": "education-f11"
+  },
+  {
+   "source": "fact:f12",
+   "target": "role:lin",
+   "relation": "spoken_by",
+   "source_ref": "education-f12"
+  },
+  {
+   "source": "fact:f13",
+   "target": "role:lin",
+   "relation": "spoken_by",
+   "source_ref": "education-f13"
+  },
+  {
+   "source": "fact:f14",
+   "target": "role:lin",
+   "relation": "spoken_by",
+   "source_ref": "education-f14"
+  },
+  {
+   "source": "fact:f15",
+   "target": "role:lin",
+   "relation": "spoken_by",
+   "source_ref": "education-f15"
+  },
+  {
+   "source": "fact:f20",
+   "target": "role:tang",
+   "relation": "spoken_by",
+   "source_ref": "education-f20"
+  },
+  {
+   "source": "fact:f22",
+   "target": "role:tang",
+   "relation": "spoken_by",
+   "source_ref": "education-f22"
+  },
+  {
+   "source": "fact:f23",
+   "target": "role:tang",
+   "relation": "spoken_by",
+   "source_ref": "education-f23"
+  },
+  {
+   "source": "fact:f25",
+   "target": "role:tang",
+   "relation": "spoken_by",
+   "source_ref": "education-f25"
+  },
+  {
+   "source": "fact:f30",
+   "target": "role:qin",
+   "relation": "spoken_by",
+   "source_ref": "education-f30"
+  },
+  {
+   "source": "fact:f31",
+   "target": "role:qin",
+   "relation": "spoken_by",
+   "source_ref": "education-f31"
+  },
+  {
+   "source": "fact:f32",
+   "target": "role:qin",
+   "relation": "spoken_by",
+   "source_ref": "education-f32"
+  },
+  {
+   "source": "fact:f33",
+   "target": "role:qin",
+   "relation": "spoken_by",
+   "source_ref": "education-f33"
+  },
+  {
+   "source": "fact:f34",
+   "target": "role:qin",
+   "relation": "spoken_by",
+   "source_ref": "education-f34"
+  },
+  {
+   "source": "fact:f35",
+   "target": "role:qin",
+   "relation": "spoken_by",
+   "source_ref": "education-f35"
+  },
+  {
+   "source": "fact:f40",
+   "target": "role:fu",
+   "relation": "spoken_by",
+   "source_ref": "education-f40"
+  },
+  {
+   "source": "fact:f41",
+   "target": "role:fu",
+   "relation": "spoken_by",
+   "source_ref": "education-f41"
+  },
+  {
+   "source": "fact:f42",
+   "target": "role:fu",
+   "relation": "spoken_by",
+   "source_ref": "education-f42"
+  },
+  {
+   "source": "fact:f43",
+   "target": "role:fu",
+   "relation": "spoken_by",
+   "source_ref": "education-f43"
+  },
+  {
+   "source": "fact:f44",
+   "target": "role:fu",
+   "relation": "spoken_by",
+   "source_ref": "education-f44"
+  },
+  {
+   "source": "fact:f45",
+   "target": "role:fu",
+   "relation": "spoken_by",
+   "source_ref": "education-f45"
+  },
+  {
+   "source": "fact:f50",
+   "target": "role:ye",
+   "relation": "spoken_by",
+   "source_ref": "education-f50"
+  },
+  {
+   "source": "fact:f51",
+   "target": "role:ye",
+   "relation": "spoken_by",
+   "source_ref": "education-f51"
+  },
+  {
+   "source": "fact:f52",
+   "target": "role:ye",
+   "relation": "spoken_by",
+   "source_ref": "education-f52"
+  },
+  {
+   "source": "fact:f53",
+   "target": "role:ye",
+   "relation": "spoken_by",
+   "source_ref": "education-f53"
+  },
+  {
+   "source": "fact:f54",
+   "target": "role:ye",
+   "relation": "spoken_by",
+   "source_ref": "education-f54"
+  },
+  {
+   "source": "fact:f55",
+   "target": "role:ye",
+   "relation": "spoken_by",
+   "source_ref": "education-f55"
+  },
+  {
+   "source": "metric:complete_rate",
+   "target": "decision:l3",
+   "relation": "fixed_by",
+   "source_ref": "f53"
+  },
+  {
+   "source": "metric:actionable",
+   "target": "decision:l9",
+   "relation": "gated_by",
+   "source_ref": "f42"
+  },
+  {
+   "source": "metric:traceability",
+   "target": "decision:l9",
+   "relation": "gated_by",
+   "source_ref": "f45"
+  },
+  {
+   "source": "decision:l1",
+   "target": "role:gu",
+   "relation": "owned_by",
+   "source_ref": "f04"
+  },
+  {
+   "source": "decision:l9",
+   "target": "role:fu",
+   "relation": "owned_by",
+   "source_ref": "f42"
+  }
+ ]
+}
